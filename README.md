@@ -1,6 +1,6 @@
 # utils
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+![build](https://travis-ci.org/glebfox/utils.svg?branch=master)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 A collection of Java utility classes, that may be helpful in everyday programming.
 
