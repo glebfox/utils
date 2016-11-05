@@ -1,0 +1,6 @@
+{
+  "name": "Utils",
+  "tagline": "A collection of Java utility classes, that may be helpful in everyday programming",
+  "body": "# utils\r\n![build](https://travis-ci.org/glebfox/utils.svg?branch=master)\r\n[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)\r\n\r\nA collection of Java utility classes, that may be helpful in everyday programming.\r\n\r\n## License\r\n\r\nCode is under the [Apache Licence 2.0](http://www.apache.org/licenses/LICENSE-2.0).\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
