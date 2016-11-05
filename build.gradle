@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '1.0'
+ext.isSnapshot = hasProperty('buildVersion') ? false : true
+
 group 'com.glebfox'
-version '0.1-SNAPSHOT'
+version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
 
 apply plugin: 'java'
 apply plugin: 'idea'
