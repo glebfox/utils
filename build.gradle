@@ -17,7 +17,7 @@
 ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '1.0'
 ext.isSnapshot = hasProperty('buildVersion') ? false : true
 
-group 'com.glebfox'
+group 'com.glebfox.utils'
 version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
 
 apply plugin: 'java'
