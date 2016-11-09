@@ -300,12 +300,13 @@ public class DateTimeUtils {
     }
 
     /**
-     * Returns the first day of the current month.
+     * Returns the date corresponding to the first day of the month based on a specified date.
      * <p>
      * The ISO calendar system behaves as follows:<br>
      * The input 2011-01-15 will return 2011-01-01.<br>
      * The input 2011-02-15 will return 2011-02-01.
      *
+     * @param date the date object, not null
      * @return the first day-of-month, not null
      */
     public static Date getFirstDateOfMonth(Date date) {
@@ -313,7 +314,7 @@ public class DateTimeUtils {
     }
 
     /**
-     * Returns the last day of the current month.
+     * Returns the date corresponding to the last day of the month based on a specified date.
      * <p>
      * The ISO calendar system behaves as follows:<br>
      * The input 2011-01-15 will return 2011-01-31.<br>
@@ -321,6 +322,7 @@ public class DateTimeUtils {
      * The input 2012-02-15 will return 2012-02-29 (leap year).<br>
      * The input 2011-04-15 will return 2011-04-30.
      *
+     * @param date the date object, not null
      * @return the last day-of-month, not null
      */
     public static Date getLastDateOfMonth(Date date) {
@@ -364,6 +366,7 @@ public class DateTimeUtils {
      * <p>
      * This method returns the primitive {@code int} value for the day-of-month.
      *
+     * @param date the date object, not null
      * @return the day-of-month, from 1 to 31
      */
     public static int getDayOfMonth(Date date) {
@@ -375,6 +378,7 @@ public class DateTimeUtils {
      * <p>
      * This method returns the primitive {@code int} value for the year.
      *
+     * @param date the date object, not null
      * @return the year
      */
     public static int getYear(Date date) {
@@ -386,6 +390,7 @@ public class DateTimeUtils {
      * <p>
      * The values are numbered following the ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
      *
+     * @param date the date object, not null
      * @return the day-of-week, from 1 (Monday) to 7 (Sunday)
      */
     public static int getDayOfWeek(Date date) {
