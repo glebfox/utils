@@ -38,10 +38,6 @@ public class DateTimeUtilsTest extends Assert {
     private int[] daysPerMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private int[] daysPerMonthLeapYear = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    private String[] monthNamesFullRu = {"января", "февраля", "марта", "апреля", "мая", "июня", "июля",
-            "августа", "сентября", "октября", "ноября", "декабря"};
-    private String[] monthNamesFullStandaloneRu = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль",
-            "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
     private String[] monthNamesFullEn = {"January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"};
 
@@ -250,10 +246,6 @@ public class DateTimeUtilsTest extends Assert {
     public void testMonthName() {
         for (int month = 0; month < 12; month++) {
             Date date = getCalendar(2016, month, 1).getTime();
-            assertEquals(monthNamesFullRu[month], DateTimeUtils.getMonthName(date,
-                    TextStyle.FULL, ruRu));
-            assertEquals(monthNamesFullStandaloneRu[month], DateTimeUtils.getMonthName(date,
-                    TextStyle.FULL_STANDALONE, ruRu));
             assertEquals(monthNamesFullEn[month], DateTimeUtils.getMonthName(date,
                     TextStyle.FULL, ENGLISH));
         }
