@@ -17,7 +17,7 @@
 ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '1.0'
 ext.isSnapshot = hasProperty('buildVersion') ? false : true
 
-group 'com.glebfox.utils'
+group 'com.glebfox'
 version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
 
 apply plugin: 'java'
@@ -31,6 +31,20 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
 }
 
 task wrapper(type: Wrapper) {
