@@ -15,7 +15,7 @@
  */
 
 ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '1.0'
-ext.isSnapshot = hasProperty('buildVersion') ? false : true
+ext.isSnapshot = !hasProperty('buildVersion')
 
 group 'com.glebfox'
 version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
