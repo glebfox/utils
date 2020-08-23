@@ -14,40 +14,31 @@
  * limitations under the License.
  */
 
-ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '1.0'
+plugins {
+    id 'java'
+}
+
+ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '2.0.0'
 ext.isSnapshot = !hasProperty('buildVersion')
 
 group 'com.glebfox'
 version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
 
-apply plugin: 'java'
-apply plugin: 'idea'
-
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
-    distributionUrl = distributionUrl.replace("bin", "all")
 }
