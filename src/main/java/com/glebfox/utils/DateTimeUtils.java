@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
+ * A suite of utilities surrounding the use of the date object.
+ *
  * @author glebfox
  */
 public class DateTimeUtils {
@@ -36,183 +38,211 @@ public class DateTimeUtils {
     }
 
     /**
-     * Obtains an instance of {@code LocalTime} from a date object.
+     * Obtains an instance of {@link LocalTime} from a date object.
      * <p>
-     * If the date object is instance of {@link java.sql.Time}, then {@link java.sql.Time#toLocalTime()} is used.
-     * Otherwise {@code LocalTime} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalTime}.
+     * If the date object is an instance of {@link java.sql.Time}, then
+     * {@link java.sql.Time#toLocalTime()} is used, otherwise {@link LocalTime}
+     * is obtained by converting {@link Instant} at {@link ZoneId#systemDefault()}
+     * to {@link LocalTime}.
      *
      * @param date the date object to convert, not null
-     * @return the local time, not null
+     * @return a local time object, not null
      */
     public static LocalTime asLocalTime(Date date) {
         return asLocalTime(date, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code LocalTime} from a date object.
+     * Obtains an instance of {@link LocalTime} from a date object.
      * <p>
-     * If the date object is instance of {@link java.sql.Time}, then {@link java.sql.Time#toLocalTime()} is used.
-     * Otherwise {@code LocalTime} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalTime}.
+     * If the date object is an instance of {@link java.sql.Time}, then
+     * {@link java.sql.Time#toLocalTime()} is used, otherwise {@link LocalTime}
+     * is obtained by converting {@link Instant} at the passed {@link ZoneId}
+     * to {@link LocalTime}.
      *
      * @param date   the date object to convert, not null
      * @param zoneId the time zone id, not null
-     * @return the local time, not null
+     * @return a local time object, not null
      */
     public static LocalTime asLocalTime(Date date, ZoneId zoneId) {
-        return date instanceof Time ? ((Time) date).toLocalTime()
+        return date instanceof Time
+                ? ((Time) date).toLocalTime()
                 : date.toInstant().atZone(zoneId).toLocalTime();
     }
 
     /**
-     * Obtains an instance of {@code LocalDate} from a date object.
+     * Obtains an instance of {@link LocalDate} from a date object.
      * <p>
-     * If the date object is instance of {@link java.sql.Date}, then {@link java.sql.Date#toLocalDate()} is used.
-     * Otherwise {@code LocalDate} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalDate}.
+     * If the date object is an instance of {@link java.sql.Date}, then
+     * {@link java.sql.Date#toLocalDate()} is used, otherwise {@link LocalDate}
+     * is obtained by converting {@link Instant} at {@link ZoneId#systemDefault()}
+     * to {@link LocalDate}.
      *
      * @param date the date object to convert, not null
-     * @return the local date, not null
+     * @return a local date object, not null
      */
     public static LocalDate asLocalDate(Date date) {
         return asLocalDate(date, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code LocalDate} from a date object.
+     * Obtains an instance of {@link LocalDate} from a date object.
      * <p>
-     * If the date object is instance of {@link java.sql.Date}, then {@link java.sql.Date#toLocalDate()} is used.
-     * Otherwise {@code LocalDate} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalDate}.
+     * If the date object is an instance of {@link java.sql.Date}, then
+     * {@link java.sql.Date#toLocalDate()} is used, otherwise {@link LocalDate}
+     * is obtained by converting {@link Instant} at the passed {@link ZoneId}
+     * to {@link LocalDate}.
      *
      * @param date   the date object to convert, not null
      * @param zoneId the time zone id, not null
-     * @return the local date, not null
+     * @return a local date object, not null
      */
     public static LocalDate asLocalDate(Date date, ZoneId zoneId) {
-        return date instanceof java.sql.Date ? ((java.sql.Date) date).toLocalDate()
+        return date instanceof java.sql.Date
+                ? ((java.sql.Date) date).toLocalDate()
                 : date.toInstant().atZone(zoneId).toLocalDate();
     }
 
     /**
-     * Obtains an instance of {@code LocalDateTime} from a date object.
+     * Obtains an instance of {@link LocalDateTime} from a date object.
      * <p>
-     * {@code LocalDate} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalDateTime}.
+     * {@link LocalDate} is obtained by converting {@link Instant} at
+     * {@link ZoneId#systemDefault()} to {@link LocalDateTime}.
      *
      * @param date the date object to convert, not null
-     * @return the local date-time, not null
+     * @return a local date-time object, not null
      */
     public static LocalDateTime asLocalDateTime(Date date) {
         return asLocalDateTime(date, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code LocalDateTime} from a date object.
+     * Obtains an instance of {@link LocalDateTime} from a date object.
      * <p>
-     * {@code LocalDate} is obtained by converting {@code Instant} at {@link ZoneId#systemDefault()}
-     * to {@code LocalDateTime}.
+     * {@link LocalDate} is obtained by converting {@link Instant} at
+     * the passed {@link ZoneId} to {@link LocalDateTime}.
      *
      * @param date   the date object to convert, not null
      * @param zoneId the time zone id, not null
-     * @return the local date-time, not null
+     * @return a local date-time object, not null
      */
     public static LocalDateTime asLocalDateTime(Date date, ZoneId zoneId) {
         return date.toInstant().atZone(zoneId).toLocalDateTime();
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local time object.
+     * Obtains an instance of {@link Date} from a local time object.
      * <p>
-     * A {@code Date} object represents a current date with time represented by {@code LocalTime}.
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at
+     * {@link LocalDate#now()} and {@link ZoneId#systemDefault()}.
      *
      * @param localTime the local time object, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalTime localTime) {
         return asDate(localTime, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local time object.
+     * Obtains an instance of {@link Date} from a local time and local date objects.
      * <p>
-     * A {@code Date} object represents date represented by {@code LocalDate}
-     * with time represented by {@code LocalTime}.
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at the passed
+     * {@link LocalDate} and {@link ZoneId#systemDefault()}.
      *
      * @param localTime the local time object, not null
      * @param localDate the local date object, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalTime localTime, LocalDate localDate) {
         return asDate(localTime, localDate, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local time object.
+     * Obtains an instance of {@link Date} from a local time object.
      * <p>
-     * A {@code Date} object represents a current date with time represented by {@code LocalTime}.
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at
+     * {@link LocalDate#now()} and the passed {@link ZoneId}.
      *
      * @param localTime the local time object, not null
      * @param zoneId    the time zone id, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalTime localTime, ZoneId zoneId) {
         return asDate(localTime, LocalDate.now(), zoneId);
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local time object.
+     * Obtains an instance of {@link Date} from a local time and local date objects.
      * <p>
-     * A {@code Date} object represents date represented by {@code LocalDate}
-     * with time represented by {@code LocalTime}.
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at the passed
+     * {@link LocalDate} and the passed {@link ZoneId}.
      *
      * @param localTime the local time object, not null
      * @param localDate the local date object, not null
      * @param zoneId    the time zone id, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalTime localTime, LocalDate localDate, ZoneId zoneId) {
         return Date.from(localTime.atDate(localDate).atZone(zoneId).toInstant());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local date object.
+     * Obtains an instance of {@link Date} from a local date object.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalDate} at the start
+     * of a day and {@link ZoneId#systemDefault()}.
      *
      * @param localDate the local date object, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalDate localDate) {
         return asDate(localDate, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local date object.
+     * Obtains an instance of {@link Date} from a local date object.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalDate} at the start
+     * of a day and the passed {@link ZoneId}.
      *
      * @param localDate the local date object, not null
      * @param zoneId    the time zone id, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalDate localDate, ZoneId zoneId) {
         return Date.from(localDate.atStartOfDay(zoneId).toInstant());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local date-time object.
+     * Obtains an instance of {@link Date} from a local date-time object.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalDateTime} at
+     * {@link ZoneId#systemDefault()}.
      *
      * @param localDateTime the local date-time object, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalDateTime localDateTime) {
         return asDate(localDateTime, getDefaultTimeZone());
     }
 
     /**
-     * Obtains an instance of {@code Date} from a local date-time object.
+     * Obtains an instance of {@link Date} from a local date-time object.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalDateTime} at
+     * the passed {@link ZoneId}.
      *
      * @param localDateTime the local date-time object, not null
      * @param zoneId        the time zone id, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date asDate(LocalDateTime localDateTime, ZoneId zoneId) {
         return Date.from(localDateTime.atZone(zoneId).toInstant());
@@ -222,98 +252,106 @@ public class DateTimeUtils {
      * Returns a date with zero time.
      *
      * @param date the date object, not null
-     * @return the date, not null
+     * @return a date object, not null
      */
     public static Date getDateWithoutTime(Date date) {
         return asDate(asLocalDate(date));
     }
 
     /**
-     * Formats a {@code Date} into a date/time string.
+     * Formats a {@link Date} into a date-time string. Delegates formatting
+     * to the {@link SimpleDateFormat} object.
      *
-     * @param date   a date to be formatted into a date/time string
-     * @param format the pattern describing the date and time format
-     * @return the formatted date/time string
+     * @param date   the date to be formatted into a date-time string, not null
+     * @param format the pattern describing the date and time format, not null
+     * @return a formatted date-time string, not null
      */
     public static String format(Date date, String format) {
         return format(date, format, getDefaultLocale());
     }
 
     /**
-     * Formats a {@code Date} into a date/time string.
+     * Formats a {@code Date} into a date-time string. Delegates formatting
+     * to the {@link SimpleDateFormat} object.
      *
-     * @param date   a date to be formatted into a date/time string
-     * @param format the pattern describing the date and time format
+     * @param date   a date to be formatted into a date-time string, not null
+     * @param format the pattern describing the date and time format, not null
      * @param locale the locale to use, not null
-     * @return the formatted date/time string
+     * @return a formatted date-time string, not null
      */
     public static String format(Date date, String format, Locale locale) {
         return new SimpleDateFormat(format, locale).format(date);
     }
 
     /**
-     * Returns the date corresponding to the first day of the week based on a specified date.
+     * Returns the date corresponding to the first day of the week
+     * based on the specified date.
      *
      * @param date the date object, not null
-     * @return the date that corresponds to the first day of the week, not null
+     * @return a date that corresponds to the first day of the week, not null
      */
     public static Date getFirstDateOfWeek(Date date) {
         return getFirstDateOfWeek(date, getDefaultLocale());
     }
 
     /**
-     * Returns the date corresponding to the first day of the week based on a specified date.
+     * Returns the date corresponding to the first day of the week
+     * based on the specified date.
      *
      * @param date   the date object, not null
      * @param locale the locale to use, not null
-     * @return the date that corresponds to the first day of the week, not null
+     * @return a date that corresponds to the first day of the week, not null
      */
     public static Date getFirstDateOfWeek(Date date, Locale locale) {
-        return asDate(__getFirstDateOfWeek(date, locale));
+        return asDate(getFirstDateOfWeekInternal(date, locale));
     }
 
-    private static LocalDate __getFirstDateOfWeek(Date date, Locale locale) {
+    private static LocalDate getFirstDateOfWeekInternal(Date date, Locale locale) {
         TemporalField fieldISO = WeekFields.of(locale).dayOfWeek();
         return asLocalDate(date).with(fieldISO, 1);
     }
 
     /**
-     * Returns the date corresponding to the last day of the week based on a specified date.
+     * Returns the date corresponding to the last day of the week based
+     * on the specified date.
      *
      * @param date the date object, not null
-     * @return the date that corresponds to the last day of the week, not null
+     * @return a date that corresponds to the last day of the week, not null
      */
     public static Date getLastDateOfWeek(Date date) {
         return getLastDateOfWeek(date, getDefaultLocale());
     }
 
     /**
-     * Returns the date corresponding to the last day of the week based on a specified date.
+     * Returns the date corresponding to the last day of the week based
+     * on the specified date.
      *
      * @param date   the date object, not null
      * @param locale the locale to use, not null
-     * @return the date that corresponds to the last day of the week, not null
+     * @return a date that corresponds to the last day of the week, not null
      */
     public static Date getLastDateOfWeek(Date date, Locale locale) {
-        return asDate(__getFirstDateOfWeek(date, locale).plusDays(6));
+        return asDate(getFirstDateOfWeekInternal(date, locale).plusDays(6));
     }
 
     /**
-     * Returns the date corresponding to the first day of the month based on a specified date.
+     * Returns the date corresponding to the first day of the month
+     * based on the specified date.
      * <p>
      * The ISO calendar system behaves as follows:<br>
      * The input 2011-01-15 will return 2011-01-01.<br>
      * The input 2011-02-15 will return 2011-02-01.
      *
      * @param date the date object, not null
-     * @return the first day-of-month, not null
+     * @return a first day-of-month, not null
      */
     public static Date getFirstDateOfMonth(Date date) {
         return asDate(asLocalDate(date).with(TemporalAdjusters.firstDayOfMonth()));
     }
 
     /**
-     * Returns the date corresponding to the last day of the month based on a specified date.
+     * Returns the date corresponding to the last day of the month
+     * based on the specified date.
      * <p>
      * The ISO calendar system behaves as follows:<br>
      * The input 2011-01-15 will return 2011-01-31.<br>
@@ -322,39 +360,43 @@ public class DateTimeUtils {
      * The input 2011-04-15 will return 2011-04-30.
      *
      * @param date the date object, not null
-     * @return the last day-of-month, not null
+     * @return a last day-of-month, not null
      */
     public static Date getLastDateOfMonth(Date date) {
         return asDate(asLocalDate(date).with(TemporalAdjusters.lastDayOfMonth()));
     }
 
     /**
-     * Gets the textual representation, such as 'January' or 'December' for passed date object.
+     * Gets the textual representation, such as 'January' or 'December'
+     * for passed date object.
      * <p>
      * Returns the textual name used to identify the month-of-year
      * with {@link TextStyle#FULL} style and default locale.
      * <p>
-     * If no textual mapping is found then the {@link Month#getValue() numeric value} is returned.
+     * If no textual mapping is found then the {@link Month#getValue()}
+     * numeric value is returned.
      *
      * @param date the date to get the text value of the month-of-year
-     * @return the text value of the month-of-year, not null
+     * @return a text value of the month-of-year, not null
      */
     public static String getMonthName(Date date) {
         return getMonthName(date, TextStyle.FULL, getDefaultLocale());
     }
 
     /**
-     * Gets the textual representation, such as 'Jan' or 'December' for passed date object.
+     * Gets the textual representation, such as 'Jan' or 'December'
+     * for passed date object.
      * <p>
      * Returns the textual name used to identify the month-of-year,
      * suitable for presentation to the user.
      * <p>
-     * If no textual mapping is found then the {@link Month#getValue() numeric value} is returned.
+     * If no textual mapping is found then the {@link Month#getValue()}
+     * numeric value is returned.
      *
      * @param date   the date to get the text value of the month-of-year
      * @param style  the length of the text required, not null
      * @param locale the locale to use, not null
-     * @return the text value of the month-of-year, not null
+     * @return a text value of the month-of-year, not null
      */
     public static String getMonthName(Date date, TextStyle style, Locale locale) {
         return asLocalDate(date).getMonth().getDisplayName(style, locale);
@@ -366,7 +408,7 @@ public class DateTimeUtils {
      * This method returns the primitive {@code int} value for the day-of-month.
      *
      * @param date the date object, not null
-     * @return the day-of-month, from 1 to 31
+     * @return a day-of-month, from 1 to 31
      */
     public static int getDayOfMonth(Date date) {
         return asLocalDate(date).getDayOfMonth();
@@ -378,7 +420,7 @@ public class DateTimeUtils {
      * This method returns the primitive {@code int} value for the year.
      *
      * @param date the date object, not null
-     * @return the year
+     * @return a year
      */
     public static int getYear(Date date) {
         return asLocalDate(date).getYear();
@@ -390,7 +432,7 @@ public class DateTimeUtils {
      * The values are numbered following the ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
      *
      * @param date the date object, not null
-     * @return the day-of-week, from 1 (Monday) to 7 (Sunday)
+     * @return a day-of-week, from 1 (Monday) to 7 (Sunday)
      */
     public static int getDayOfWeek(Date date) {
         return asLocalDate(date).getDayOfWeek().getValue();
@@ -400,28 +442,31 @@ public class DateTimeUtils {
      * Checks if the date object represented by {@code input} is within the range
      * represented by {@code startDate} and {@code endDate} inclusive.
      *
-     * @param input     a date object to test, not null
-     * @param startDate a date object corresponding to the lower boundary, not null
-     * @param endDate   a date object corresponding to the upper boundary, not null
+     * @param input     the date object to test, not null
+     * @param startDate the date object corresponding to the lower boundary, not null
+     * @param endDate   the date object corresponding to the upper boundary, not null
      * @return {@code true} if the date object represented by {@code input} is within
      * the range represented by {@code startDate} and {@code endDate} inclusive
+     * @throws IllegalArgumentException if the start date is after the end date
      */
     public static boolean isWithinRange(Date input, Date startDate, Date endDate) {
         if (startDate.after(endDate)) {
             throw new IllegalArgumentException("The start date must be earlier or equals to the end date");
         }
+
         return !(input.before(startDate) || input.after(endDate));
     }
 
     /**
-     * Checks if a {@code input} is <i>not</i> within the range
-     * represented by {@code startDate} and {@code endDate}.
+     * Checks if the date object represented by {@code input} is <i>not</i> within
+     * the range represented by {@code startDate} and {@code endDate} exclusive.
      *
-     * @param input     a date object to test, not null
-     * @param startDate a date object corresponding to the lower boundary, not null
-     * @param endDate   a date object corresponding to the upper boundary, not null
+     * @param input     the date object to test, not null
+     * @param startDate the date object corresponding to the lower boundary, not null
+     * @param endDate   the date object corresponding to the upper boundary, not null
      * @return {@code true} if the date object represented by {@code input} is <i>not</i>
-     * within the range represented by {@code startDate} and {@code endDate} inclusive
+     * within the range represented by {@code startDate} and {@code endDate} exclusive
+     * @throws IllegalArgumentException if the start date is after the end date
      */
     public static boolean isNotWithinRange(Date input, Date startDate, Date endDate) {
         return !isWithinRange(input, startDate, endDate);
