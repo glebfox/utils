@@ -1,3 +1,9 @@
 language: java
 jdk:
   - openjdk11
+
+install:
+  - ./gradlew --no-daemon assemble
+
+script:
+  - ./gradlew --no-daemon check javadoc
