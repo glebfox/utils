@@ -151,12 +151,12 @@ public class DateTimeUtils {
      * produced by converting the passed {@link LocalTime} at the passed
      * {@link LocalDate} and {@link ZoneId#systemDefault()}.
      *
-     * @param localTime the local time object, not null
      * @param localDate the local date object, not null
+     * @param localTime the local time object, not null
      * @return a date object, not null
      */
-    public static Date asDate(LocalTime localTime, LocalDate localDate) {
-        return asDate(localTime, localDate, getDefaultTimeZone());
+    public static Date asDate(LocalDate localDate, LocalTime localTime) {
+        return asDate(localDate, localTime, getDefaultTimeZone());
     }
 
     /**
@@ -171,7 +171,7 @@ public class DateTimeUtils {
      * @return a date object, not null
      */
     public static Date asDate(LocalTime localTime, ZoneId zoneId) {
-        return asDate(localTime, LocalDate.now(), zoneId);
+        return asDate(LocalDate.now(), localTime, zoneId);
     }
 
     /**
@@ -181,12 +181,12 @@ public class DateTimeUtils {
      * produced by converting the passed {@link LocalTime} at the passed
      * {@link LocalDate} and the passed {@link ZoneId}.
      *
-     * @param localTime the local time object, not null
      * @param localDate the local date object, not null
+     * @param localTime the local time object, not null
      * @param zoneId    the time zone id, not null
      * @return a date object, not null
      */
-    public static Date asDate(LocalTime localTime, LocalDate localDate, ZoneId zoneId) {
+    public static Date asDate(LocalDate localDate, LocalTime localTime, ZoneId zoneId) {
         return Date.from(localTime.atDate(localDate).atZone(zoneId).toInstant());
     }
 

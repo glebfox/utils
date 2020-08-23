@@ -112,8 +112,10 @@ public class DateTimeUtilsTest extends Assert {
                 for (int second = 0; second < 60; second++) {
                     Date expectedDate = getCalendar(2016, 0, 1,
                             hour, minute, second).getTime();
-                    Date actualDate = DateTimeUtils.asDate(LocalTime.of(hour, minute, second),
-                            LocalDate.of(2016, 1, 1));
+                    Date actualDate = DateTimeUtils.asDate(
+                            LocalDate.of(2016, 1, 1),
+                            LocalTime.of(hour, minute, second)
+                    );
 
                     assertEquals(expectedDate, actualDate);
                 }
