@@ -18,6 +18,7 @@ package com.glebfox.utils
 
 import spock.lang.Specification
 
+import java.lang.reflect.InvocationTargetException
 import java.sql.Time
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -34,6 +35,24 @@ class DateTimeUtilsTest extends Specification {
                                                          "August", "September", "October", "November", "December"]
 
     private static Locale RU = Locale.forLanguageTag("ru-RU")
+
+    def "util class should not be instantiable"() {
+        def constructor = DateTimeUtils.class.getDeclaredConstructor()
+
+        when:
+        constructor.newInstance()
+
+        then:
+        thrown(IllegalAccessException)
+
+        when:
+        constructor.setAccessible(true)
+        constructor.newInstance()
+
+        then:
+        InvocationTargetException exception = thrown()
+        exception.cause.class == UnsupportedOperationException
+    }
 
     def "convert date to local time"() {
         when:
