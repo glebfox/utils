@@ -17,6 +17,7 @@
 plugins {
     id 'java'
     id 'groovy'
+    id 'jacoco'
     id 'com.github.spotbugs' version '4.5.0'
 }
 
@@ -69,3 +70,5 @@ spotbugsTest {
         }
     }
 }
+
+test.finalizedBy jacocoTestReport
