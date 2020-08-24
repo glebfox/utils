@@ -18,15 +18,20 @@ plugins {
     id 'java'
     id 'groovy'
     id 'jacoco'
+    id 'maven-publish'
     id 'com.github.spotbugs' version '4.5.0'
     id 'com.github.kt3k.coveralls' version '2.10.2'
 }
 
-ext.artifactVersion = hasProperty('buildVersion') ? property('buildVersion') : '2.0.0'
-ext.isSnapshot = !hasProperty('buildVersion')
+ext {
+    artifactGroup = 'com.glebfox'
+    artifactName = 'util'
+    artifactVersion = '2.0.0-SNAPSHOT'
+    artifactVersion = rootProject.hasProperty('buildVersion') ? rootProject['buildVersion'] : artifactVersion
+}
 
-group 'com.glebfox'
-version artifactVersion + (isSnapshot ? '-SNAPSHOT' : '')
+group = artifactGroup
+version = artifactVersion
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -45,6 +50,57 @@ java {
 
 artifacts {
     archives javadocJar, sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'utils'
+            from components.java
+
+            pom {
+                name = 'utils'
+                description = 'A collection of Java utility classes, that may be helpful in everyday programming.'
+                url = 'https://glebfox.github.io/utils/'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'glebfox'
+                        name = 'Gleb Gorelov'
+                        email = 'glebfox@gmail.com'
+                        url = 'glebfox.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:https://github.com/glebfox/utils.git'
+                    developerConnection = 'scm:https://github.com/glebfox/utils.git'
+                    url = 'https://github.com/glebfox/utils/'
+                }
+            }
+        }
+    }
+
+    if (rootProject.hasProperty('uploadUser') && rootProject.hasProperty('uploadPassword')) {
+        repositories {
+            maven {
+                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username = rootProject['uploadUser']
+                    password = rootProject['uploadPassword']
+                }
+            }
+        }
+    }
 }
 
 spotbugs {
