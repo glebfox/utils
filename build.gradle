@@ -19,6 +19,7 @@ plugins {
     id 'groovy'
     id 'jacoco'
     id 'maven-publish'
+    id 'signing'
     id 'com.github.spotbugs' version '4.5.0'
     id 'com.github.kt3k.coveralls' version '2.10.2'
 }
@@ -100,6 +101,12 @@ publishing {
                 }
             }
         }
+    }
+}
+
+if (rootProject.hasProperty('useSigning')) {
+    signing {
+        sign publishing.publications.mavenJava
     }
 }
 
