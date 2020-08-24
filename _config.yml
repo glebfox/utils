@@ -1,0 +1,8 @@
+title: Utils
+description: A collection of Java utility classes, that may be helpful in everyday programming
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-architect
+
+gems:
+  - jekyll-mentions
