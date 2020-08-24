@@ -145,21 +145,6 @@ public class DateTimeUtils {
     }
 
     /**
-     * Obtains an instance of {@link Date} from a local time and local date objects.
-     * <p>
-     * {@link Date} is obtained from an {@link Instant} object, which is
-     * produced by converting the passed {@link LocalTime} at the passed
-     * {@link LocalDate} and {@link ZoneId#systemDefault()}.
-     *
-     * @param localDate the local date object, not null
-     * @param localTime the local time object, not null
-     * @return a date object, not null
-     */
-    public static Date asDate(LocalDate localDate, LocalTime localTime) {
-        return asDate(localDate, localTime, getDefaultTimeZone());
-    }
-
-    /**
      * Obtains an instance of {@link Date} from a local time object.
      * <p>
      * {@link Date} is obtained from an {@link Instant} object, which is
@@ -172,22 +157,6 @@ public class DateTimeUtils {
      */
     public static Date asDate(LocalTime localTime, ZoneId zoneId) {
         return asDate(LocalDate.now(), localTime, zoneId);
-    }
-
-    /**
-     * Obtains an instance of {@link Date} from a local time and local date objects.
-     * <p>
-     * {@link Date} is obtained from an {@link Instant} object, which is
-     * produced by converting the passed {@link LocalTime} at the passed
-     * {@link LocalDate} and the passed {@link ZoneId}.
-     *
-     * @param localDate the local date object, not null
-     * @param localTime the local time object, not null
-     * @param zoneId    the time zone id, not null
-     * @return a date object, not null
-     */
-    public static Date asDate(LocalDate localDate, LocalTime localTime, ZoneId zoneId) {
-        return Date.from(localTime.atDate(localDate).atZone(zoneId).toInstant());
     }
 
     /**
@@ -217,6 +186,37 @@ public class DateTimeUtils {
      */
     public static Date asDate(LocalDate localDate, ZoneId zoneId) {
         return Date.from(localDate.atStartOfDay(zoneId).toInstant());
+    }
+
+    /**
+     * Obtains an instance of {@link Date} from a local time and local date objects.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at the passed
+     * {@link LocalDate} and {@link ZoneId#systemDefault()}.
+     *
+     * @param localDate the local date object, not null
+     * @param localTime the local time object, not null
+     * @return a date object, not null
+     */
+    public static Date asDate(LocalDate localDate, LocalTime localTime) {
+        return asDate(localDate, localTime, getDefaultTimeZone());
+    }
+
+    /**
+     * Obtains an instance of {@link Date} from a local time and local date objects.
+     * <p>
+     * {@link Date} is obtained from an {@link Instant} object, which is
+     * produced by converting the passed {@link LocalTime} at the passed
+     * {@link LocalDate} and the passed {@link ZoneId}.
+     *
+     * @param localDate the local date object, not null
+     * @param localTime the local time object, not null
+     * @param zoneId    the time zone id, not null
+     * @return a date object, not null
+     */
+    public static Date asDate(LocalDate localDate, LocalTime localTime, ZoneId zoneId) {
+        return Date.from(localTime.atDate(localDate).atZone(zoneId).toInstant());
     }
 
     /**
@@ -259,8 +259,8 @@ public class DateTimeUtils {
     }
 
     /**
-     * Formats a {@link Date} into a date-time string. Delegates formatting
-     * to the {@link SimpleDateFormat} object.
+     * Formats a {@link Date} into a date-time string using {@link Locale#ENGLISH}.
+     * Delegates formatting to the {@link SimpleDateFormat} object.
      *
      * @param date   the date to be formatted into a date-time string, not null
      * @param format the pattern describing the date and time format, not null
@@ -371,7 +371,7 @@ public class DateTimeUtils {
      * for passed date object.
      * <p>
      * Returns the textual name used to identify the month-of-year
-     * with {@link TextStyle#FULL} style and default locale.
+     * with {@link TextStyle#FULL} style and {@link Locale#ENGLISH}.
      * <p>
      * If no textual mapping is found then the {@link Month#getValue()}
      * numeric value is returned.
@@ -473,7 +473,7 @@ public class DateTimeUtils {
     }
 
     private static Locale getDefaultLocale() {
-        return Locale.getDefault();
+        return Locale.ENGLISH;
     }
 
     private static ZoneId getDefaultTimeZone() {
