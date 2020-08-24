@@ -7,3 +7,6 @@ install:
 
 script:
   - ./gradlew --no-daemon check javadoc
+
+after_success:
+  - ./gradlew --no-daemon jacocoTestReport coveralls
