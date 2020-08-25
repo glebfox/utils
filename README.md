@@ -3,6 +3,7 @@
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.glebfox/utils/badge.svg)](https://mvnrepository.com/artifact/com.glebfox/utils)
 [![Coverage Status](https://coveralls.io/repos/github/glebfox/utils/badge.svg?branch=master)](https://coveralls.io/github/glebfox/utils?branch=master)
+[![javadoc](https://javadoc.io/badge2/com.glebfox/utils/javadoc.svg)](https://javadoc.io/doc/com.glebfox/utils)
 
 A collection of Java utility classes, that may be helpful in everyday programming.
 
